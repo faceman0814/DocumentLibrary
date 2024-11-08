@@ -1,0 +1,68 @@
+<footer class="{{ .Site.Params.background_color_class | default "bg-black" }} bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="{{ .Site.Home.Permalink }}" >
+    &copy; {{ with .Site.Copyright | default .Site.Title }} {{ . | safeHTML }} {{ now.Format "2006"}} 
+
+  {{ end }}
+  </a>
+    <div>{{ partialCached "social/follow.html" . }}</div>
+    <div class="footer-container">
+      本站总访问量<span id="busuanzi_value_site_uv"></span>次
+      &nbsp;
+      <span id="sitetime">载入运行时间...</span>
+    </div>
+  </div>
+ 
+</footer>
+<style>
+  .footer-container {
+    color: white; 
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+  }
+</style>
+
+<script>
+  function siteTime() {
+      var seconds = 1000;
+      var minutes = seconds * 60;
+      var hours = minutes * 60;
+      var days = hours * 24;
+      var years = days * 365;
+      var today = new Date();
+      var startYear = 2024;
+      var startMonth = 11;
+      var startDate = 8;
+      var startHour = 14;
+      var startMinute = 15;
+      var startSecond = 11;
+      var todayYear = today.getFullYear();
+      var todayMonth = today.getMonth() + 1;
+      var todayDate = today.getDate();
+      var todayHour = today.getHours();
+      var todayMinute = today.getMinutes();
+      var todaySecond = today.getSeconds();
+      var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+      var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+      var diff = t2 - t1;
+      var diffYears = Math.floor(diff / years);
+      var diffDays = Math.floor((diff / days) - diffYears * 365);
+      var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+      var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+          minutes);
+      var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+          diffMinutes * minutes) / seconds);
+      if (startYear == todayYear) {
+          //document.getElementById("year").innerHTML = todayYear;
+          document.getElementById("sitetime").innerHTML = "博客已运行 " + diffDays + " 天 " + diffHours +
+              " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+      } else {
+          //document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+          document.getElementById("sitetime").innerHTML = "博客已运行 " + diffYears + " 年 " + diffDays +
+              " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+      }
+  }
+  setInterval(siteTime, 1000);
+
+</script>
