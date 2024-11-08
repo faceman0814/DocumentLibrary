@@ -27,10 +27,11 @@ Get-ChildItem -Recurse | Where-Object { !$_.PSIsContainer } | ForEach-Object {
     Set-Content $_.FullName -Value $content
 }
 
-# 复制 images 文件夹
-$sourcePath = "D:\HugoWebsite\facemanblog\static\images"
-$destinationPath = "D:\HugoWebsite\facemanblog\public\images"
+# 复制 images 文件夹，使用相对路径回退到根目录再访问static/images
+$sourcePath = "..\static\images"
+$destinationPath = ".\images"
 Copy-Item -Path $sourcePath\* -Destination $destinationPath -Force -Recurse
+
 
 # 将更改添加到git
 git add .
