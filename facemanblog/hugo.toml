@@ -6,6 +6,8 @@ defaultContentLanguage = "zh"
 sectionPagesMenu = "main"
 enableRobotsTXT = true
 
+show_reading_time = true
+
 [services.googleAnalytics]
 id = ''
 
